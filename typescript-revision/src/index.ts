@@ -43,3 +43,29 @@ function log() {
 
 delayedcall(log)
 
+// interfaces and types in typescript
+
+interface User {
+    firstName: string,
+    phoneNumber: number,
+    age: number
+}
+
+function isvaild(user: User) {
+    if (user.age >= 18) {
+        return true;
+
+    }
+
+    else {
+        return false;
+    }
+}
+
+const demouser: User = {
+    firstName: "Rohan",
+    phoneNumber: 807660310,
+    age: 23
+}
+
+console.log(isvaild(demouser))
