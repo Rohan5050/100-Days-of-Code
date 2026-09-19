@@ -212,6 +212,140 @@ console.log(filterpeople([{
 }]))
 
 
+// sample code to find sum of age of two users
+
+interface demoUsers {
+    name: string,
+    age: number
+}
+
+
+function sumofage(user1: demoUsers, user2: demoUsers) {
+    return user1.age + user2.age;
+}
+
+const result = sumofage({
+    name: "Rohan",
+    age: 23,
+},
+    {
+        name: "Rohit",
+        age: 20
+    })
+
+console.log(result);
+
+
+// Advance Typescript ( Pick, Partial, Readonly,  )
+
+// Sample code to understand about typescript api
+
+// Pick and Partial
+
+interface demoUser {
+    id: string,
+    name: string,
+    age: number,
+    email: string,
+    createdAt: string
+}
+
+/* Instead of redefining the arguements we will use Pick
+interface updateUserprops {
+    name: string,
+    age: number,
+    email: string
+}*/
+
+type updateUserprops = Pick<demoUser, "name" | "age" | "email">
+
+type updateUserpropsOptional = Partial<updateUserprops>
+
+function updateUser(updatedUserprops: updateUserpropsOptional) {
+    console.log("Updated user details");
+}
+
+updateUser({
+    name: "Rohan",
+    age: 23,
+
+})
+
+// Readonly
+
+interface config {
+    readonly endpoint: string,
+    readonly apikey: string
+}
+
+const config: Readonly<config> = {
+    endpoint: "https://api/test",
+    apikey: "apnvfnfvn"
+}
+
+//config.endpoint = "https:/api/test2" // Shows error Cannot assign to 'endpoint' because it is a read-only property
+
+// Records and Maps
+
+// ugly way of mantaining objects
+interface AllUser {
+    id: string;
+    name: string;
+}
+
+type persons = { [key: string]: AllUser };
+
+const user: persons = {
+    'abc123': { id: 'abc123', name: 'John Doe' },
+    'xyz789': { id: 'xyz789', name: 'Jane Doe' },
+};
+
+// better way of mantaining objects by Records
+
+interface AllUser {
+    id: string;
+    name: string;
+}
+
+type AllUsers = Record<string, AllUser>;
+
+const users: AllUsers = {
+    'abc123': { id: 'abc123', name: 'John Doe' },
+    'xyz789': { id: 'xyz789', name: 'Jane Doe' },
+};
+
+console.log(users['abc123']); // Output: { id: 'abc123', name: 'John Doe' }
+
+// Maps ( Recommended way of managing objects)
+
+interface allUser {
+    id: string;
+    name: string;
+}
+
+// Initialize an empty Map
+const usersMap = new Map<string, allUser>();
+
+// Add users to the map using .set
+usersMap.set('abc123', { id: 'abc123', name: 'John Doe' });
+usersMap.set('xyz789', { id: 'xyz789', name: 'Jane Doe' });
+
+// Accessing a value using .get
+console.log(usersMap.get('abc123')); // Output: { id: 'abc123', name: 'John Doe' }
+
+// Exclude keyword in typescript
+
+type Event = 'click' | 'scroll' | 'mousemove';
+type ExcludeEvent = Exclude<Event, 'scroll'>; // 'click' | 'mousemove'
+
+const handleEvent = (event: ExcludeEvent) => {
+    console.log(`Handling event: ${event}`);
+};
+
+handleEvent('click'); // OK
+
+
+
 
 /*
    Note :
